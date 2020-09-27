@@ -1,8 +1,9 @@
 import React from 'react';
-import { Button, Modal } from "react-bootstrap"
+import { Button, Image, Modal } from "react-bootstrap"
+import { connect } from 'react-redux';
+import { getRandomImg } from '../redux/actions/api';
 
-function PhotoModal({show, handleClose}) {
-
+function PhotoModal({show, handleClose, imgURL, selectedBreed, getRandomImg}) {
   return (
     <>
       <Modal
@@ -12,23 +13,21 @@ function PhotoModal({show, handleClose}) {
         keyboard={false}
       >
         <Modal.Header closeButton>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="secondary" onClick={handleClose}>
-            Refresh
+          <Button variant="secondary" onClick={() => getRandomImg(selectedBreed)}>
+            New
           </Button>
         </Modal.Header>
         <Modal.Body>
-          Img
-          {/* //TODO: IMG */}
+          <Image rounded fluid src={imgURL} />
         </Modal.Body>
-        <Modal.Footer>
-          
-        </Modal.Footer>
       </Modal>
     </>
   );
 }
 
-export { PhotoModal }
+const mapStateToProps = state => ({...state.api})
+const mapDispatchToProps = dispatch => ({
+  getRandomImg: (breed) => dispatch(getRandomImg(breed))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(PhotoModal);

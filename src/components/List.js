@@ -1,24 +1,36 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Button } from "react-bootstrap"
+import { Button, ListGroup } from "react-bootstrap"
+import { getRandomImg } from '../redux/actions/api';
 
-const ListElement = ({name, handleShow}) => 
-(<Button variant="primary" onClick={handleShow}>
-  {name}
-</Button>)
+const ListElement = ({name, onClick}) => 
+(
+  <Button variant="light">
+    <ListGroup.Item variant="primary" onClick={onClick}>
+        {name}
+    </ListGroup.Item>
+  </Button>
+)
 
-function List({breeds, handleShow}) {
+function List({breeds, handleShow, getRandomImg}) {
   return (
-    <div className="List">
-      {breeds.map(b => <ListElement handleShow={handleShow} key={b} name={b}/>)}
-    </div>
+    <ListGroup >
+      {breeds.map(b => <ListElement
+        key={b}
+        onClick={() => {
+          getRandomImg(b)
+          handleShow()
+        }}
+        name={b} 
+      />)}
+    </ListGroup>
   );
 }
 
 const mapStateToProps = state => ({...state.api})
 
 const mapDispatchToProps = dispatch => ({
-// simpleAction: () => dispatch(simpleAction())
+  getRandomImg: (breed) => dispatch(getRandomImg(breed))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(List);

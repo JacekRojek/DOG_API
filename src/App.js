@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import './App.css';
 import List from './components/List';
-import { PhotoModal } from './components/Modal';
+import PhotoModal from './components/Modal';
 import { fetchBreeds } from './redux/actions/api';
 
 function App() {
