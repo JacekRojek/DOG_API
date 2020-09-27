@@ -1,12 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Button } from "react-bootstrap"
 
-const ListElement = ({name}) => <p >{name}</p>
+const ListElement = ({name, handleShow}) => 
+(<Button variant="primary" onClick={handleShow}>
+  {name}
+</Button>)
 
-function List({breeds}) {
+function List({breeds, handleShow}) {
   return (
     <div className="List">
-      {breeds.map(b => <ListElement key={b} name={b}/>)}
+      {breeds.map(b => <ListElement handleShow={handleShow} key={b} name={b}/>)}
     </div>
   );
 }
