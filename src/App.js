@@ -15,7 +15,7 @@ function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchBreeds());
-  }, []);
+  });
   return (
     <div className="App">
       <List handleShow={handleShow}/>
