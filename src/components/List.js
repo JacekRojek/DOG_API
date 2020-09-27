@@ -7,7 +7,7 @@ const ListElement = ({name, onClick}) =>
 (
   <Button variant="light">
     <ListGroup.Item variant="primary" onClick={onClick}>
-        {name}
+        {name.replace(/^\w/, c => c.toUpperCase())}
     </ListGroup.Item>
   </Button>
 )
